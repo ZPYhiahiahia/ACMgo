@@ -56,6 +56,11 @@ void dfs(int cur, int father, int dep, int n)
     vis[cur] = 2;
 }
 int main(){
-    
+    // 在这里输入n
+    /*
+     * 在这里输入图
+     *
+     */
+    // dfs(0,-1,1,n); 调用函数
 }
 
