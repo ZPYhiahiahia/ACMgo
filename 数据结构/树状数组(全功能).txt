@@ -1,0 +1,97 @@
+#include <bits/stdc++.h>
+#define Max 500010
+using namespace std;
+int N;
+int data[Max] = {0};
+int C[Max] = {0}; //差分数组
+int C2[Max] = {0}; // C2[i] = (i-1)*C[i]
+int BIT[Max] = {0};
+int BIT1[Max] = {0};
+int BIT2[Max] = {0};
+int lowbit(int x){
+    return (x)&(-x);
+}
+int getsum(int x){ // 数据数组求和
+    int sum = 0;
+    for(;x > 0;x-=lowbit(x)){
+        sum+=BIT[x];
+    }
+    return sum;
+}
+int getsum1(int x){ // 差分数组求和
+    int sum = 0;
+    for(;x > 0;x-=lowbit(x)){
+        sum+=BIT1[x];
+    }
+    return sum;
+}
+int getsum2(int x){
+    int sum = 0;
+    for(;x > 0;x-=lowbit(x)){
+        sum+=BIT2[x];
+    }
+    return sum;
+}
+void add(int i,int add){ // 数据BIT更新
+    for (;i <= N;i+=lowbit(i)){
+        BIT[i]+=add;
+    }
+}
+void add1(int i,int add){// 差分BIT更新
+    for(;i <= N;i+=lowbit(i)){
+        BIT1[i]+=add;
+    }
+}
+void add2(int i,int add){
+    for(;i <= N;i+=lowbit(i)){
+        BIT2[i]+=add;
+    }
+}
+int main(){
+    /*
+     * 输入数据到data , 更新BIT数组
+     */
+
+    /* 区间修改, 单点查询
+     * C[i] = data[i]-data[i-1]
+     * add1(i,C[i])
+     * 第x个数为getsum1(x)
+     *
+     */
+    /*区间修改, 区间查询
+     * C2[i] = (i-1)*C[i]
+     * add2(i,C2[i])
+     * 前n项和为n*getsum1(n)-getsum2(n)
+     *
+     */
+
+
+    /*
+    cin >> N;
+    for(int i = 1;i <= N;i++){  输入数据
+        cin >> data[i];
+        C[i] = data[i]-data[i-1];
+        C2[i] = (i-1)*C[i];
+        add1(i,C[i]);
+        add2(i,C2[i]);
+    }
+    int l,r;
+    cin >> l >> r; 修改区间
+    int v;
+    cin >> v;
+    C[l] +=v;
+    C[r+1] -=v;
+    add1(l,v);
+    add1(r+1,-v);
+    int x;
+    cin >> x; 查询单点
+    cout << getsum1(x) << endl;
+    C2[l] += v*(l-1);
+    C2[r+1] += (-v)*(r);
+    add2(l,v*(l-1));
+    add2(r+1,(-v)*r);
+    cin >> l >> r; 查询区间
+    cout << r*getsum1(r)-getsum2(r)-((l-1)*getsum1(l-1)-getsum2(l-1)) << endl;
+     */
+}
+
